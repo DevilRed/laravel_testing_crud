@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Http\Requests\StoreEventRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class EventsController extends Controller
@@ -28,5 +29,11 @@ class EventsController extends Controller
     {
         $event->update($request->all());
         return response()->json($event, 200);
+    }
+
+    public function destroy(Event $event): Response
+    {
+        $event->delete();
+        return response(null, 204);// response without content
     }
 }
