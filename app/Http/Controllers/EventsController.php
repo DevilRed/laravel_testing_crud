@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Http\Requests\StoreEventRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 
 class EventsController extends Controller
@@ -21,5 +22,11 @@ class EventsController extends Controller
     {
         $events = Event::all();
         return view('events.index', ['events' => $events]);
+    }
+
+    public function update(Request $request, Event $event): JsonResponse
+    {
+        $event->update($request->all());
+        return response()->json($event, 200);
     }
 }
